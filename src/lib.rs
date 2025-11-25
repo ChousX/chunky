@@ -99,7 +99,7 @@ fn on_add_chunk(mut world: DeferredWorld, HookContext { entity, .. }: HookContex
     if chunk_manager.is_loaded(&chunk_pos) {
         warn!(
             "New chunk at pos:{} was not spawned there was already a chunk there",
-            chunk_pos.0
+            chunk_pos
         );
         return;
     }
