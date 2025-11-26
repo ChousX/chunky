@@ -216,8 +216,8 @@ fn chunk_loader(
 #[cfg(feature = "chunk_visualizer")]
 #[derive(Debug, Clone, Copy, Default, Eq, PartialEq, Hash, States)]
 pub enum ChunkBoundryVisualizer {
-    #[default]
     On,
+    #[default]
     Off,
 }
 

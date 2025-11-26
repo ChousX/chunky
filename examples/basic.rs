@@ -16,6 +16,7 @@ fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
+    mut visualizer: ResMut<NextState<ChunkBoundryVisualizer>>,
 ) {
     commands.spawn((
         Camera3d::default(),
@@ -38,6 +39,7 @@ fn setup(
         },
         Transform::from_xyz(4.0, 8.0, 4.0),
     ));
+    visualizer.set(ChunkBoundryVisualizer::On);
 }
 
 fn camera_movement(
