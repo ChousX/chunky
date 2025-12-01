@@ -65,7 +65,8 @@ impl Plugin for ChunkyPlugin {
         app.insert_resource(ChunkManager::new(self.chunk_size));
 
         #[cfg(feature = "reflect")]
-        app.register_type::<ChunkPos>();
+        app.register_type::<ChunkPos>()
+            .register_type::<ChunkManager>();
         #[cfg(feature = "chunk_visualizer")]
         {
             app.init_state::<ChunkBoundryVisualizer>().add_systems(
