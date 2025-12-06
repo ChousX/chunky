@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use bevy::prelude::*;
 
 use crate::{Chunk, ChunkManager, ChunkPos};
@@ -65,4 +67,13 @@ fn chunk_loader(
             }
         }
     }
+}
+
+#[derive(Resource, Debug)]
+#[cfg_attr(feature = "reflect", derive(Reflect))]
+#[cfg_attr(feature = "reflect", reflect(Resource))]
+pub struct ChunkLoaderSettings {
+    /// max_loaded: 0 will mean do not despawn chunks based on max_loaded amount
+    pub max_loaded: usize,
+    pub serializing_deserializing_path: &'static Path,
 }
