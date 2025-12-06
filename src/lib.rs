@@ -35,6 +35,9 @@ mod chunk_loader;
 #[cfg(feature = "chunk_visualizer")]
 mod chunk_visualizer;
 
+#[cfg(feature = "chunk_unloader")]
+mod chunk_unloader;
+
 use bevy::{
     ecs::{lifecycle::HookContext, world::DeferredWorld},
     prelude::*,
@@ -45,6 +48,13 @@ use std::collections::HashMap;
 pub mod prelude {
     #[cfg(feature = "chunk_loader")]
     pub use crate::chunk_loader::ChunkLoader;
+    #[cfg(all(feature = "chunk_unloader", feature = "chunk_loader"))]
+    pub use crate::chunk_unloader::ChunkUnloadRadius;
+    #[cfg(feature = "chunk_unloader")]
+    pub use crate::chunk_unloader::{
+        ChunkLastAccess, ChunkPinned, ChunkUnloadByDistance, ChunkUnloadEvent, ChunkUnloadLimit,
+        ChunkUnloadReason,
+    };
     #[cfg(feature = "chunk_visualizer")]
     pub use crate::chunk_visualizer::ChunkBoundryVisualizer;
     pub use crate::{Chunk, ChunkManager, ChunkPos, ChunkyPlugin};
@@ -73,6 +83,8 @@ impl Plugin for ChunkyPlugin {
         app.add_plugins(chunk_loader::ChunkLoaderPlugin);
         #[cfg(feature = "chunk_visualizer")]
         app.add_plugins(chunk_visualizer::ChunkBoundryVisualizerPlugin);
+        #[cfg(feature = "chunk_unloader")]
+        app.add_plugins(chunk_unloader::ChunkUnloaderPlugin);
         #[cfg(feature = "reflect")]
         app.register_type::<ChunkPos>()
             .register_type::<ChunkManager>();

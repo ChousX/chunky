@@ -20,11 +20,12 @@ unexpected_cfgs = { level = "warn", check-cfg = ["cfg(bevy_lint)"] }
 
 [features]
 # Default to including both visualizer and loader
-default = ["chunk_visualizer", "chunk_loader"]
+default = ["chunk_visualizer", "chunk_loader", "chunk_unloader"]
 reflect = []
 chunk_info = []
 chunk_visualizer = []
 chunk_loader = []
+chunk_unloader = []
 
 dev = [
     # Improve compile times for dev builds by linking Bevy as a dynamic library.
